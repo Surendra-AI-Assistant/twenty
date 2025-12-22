@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 import { isNonEmptyString } from '@sniptt/guards';
 import { AppPath } from 'twenty-shared/types';
 import { getImageAbsoluteURI, isDefined } from 'twenty-shared/utils';
-import { Avatar } from 'twenty-ui/display';
 import { UndecoratedLink } from 'twenty-ui/navigation';
 import { REACT_APP_SERVER_BASE_URL } from '~/config';
 import { useRedirectToDefaultDomain } from '~/modules/domain-manager/hooks/useRedirectToDefaultDomain';
@@ -48,6 +47,7 @@ const StyledPrimaryLogo = styled.div<{ src: string }>`
   background-size: cover;
   height: 100%;
   width: 100%;
+  border-radius: 50%;
 `;
 
 export const Logo = ({
@@ -75,17 +75,17 @@ export const Logo = ({
 
   return (
     <StyledContainer onClick={() => onClick?.()}>
-      {isUsingDefaultLogo ? (
+      {secondaryLogoUrl ? (
         <UndecoratedLink
           to={AppPath.SignInUp}
           onClick={redirectToDefaultDomain}
         >
-          <StyledPrimaryLogo src={primaryLogoUrl} />
+          <StyledPrimaryLogo src={secondaryLogoUrl} />
         </UndecoratedLink>
       ) : (
         <StyledPrimaryLogo src={primaryLogoUrl} />
       )}
-      {isDefined(secondaryLogoUrl) ? (
+      {/* {!isDefined(secondaryLogoUrl) ? (
         <StyledSecondaryLogoContainer>
           <StyledSecondaryLogo src={secondaryLogoUrl} />
         </StyledSecondaryLogoContainer>
@@ -100,7 +100,7 @@ export const Logo = ({
             />
           </StyledSecondaryLogoContainer>
         )
-      )}
+      )} */}
     </StyledContainer>
   );
 };
